@@ -25,8 +25,8 @@ export const getAllUserAddresses = async () => {
       userId: session?.user.id,
     }).lean();
 
-    // const addresses = JSON.parse(JSON.stringify(alladdresses));
-    return addresses;
+    return JSON.parse(JSON.stringify(addresses));
+    // return addresses;
   } catch (error) {
     console.error("Error:", error);
     return [];

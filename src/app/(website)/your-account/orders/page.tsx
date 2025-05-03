@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -13,9 +15,6 @@ import MyOrders from "@/components/order/MyOrders";
 
 const Orders = async () => {
   const orders = await getMyAllOrders();
-  // const { data: session } = useSession();
-
-  // if (!session) redirect("/sign-in");
 
   return (
     <div className="min-h-screen w-full">

@@ -23,11 +23,11 @@ import {
 } from "@paypal/react-paypal-js";
 
 import { toast } from "sonner";
-import CheckoutFooter from "@/components/checkout/CheckoutFooter";
 import CashOnDelivery from "@/components/checkout/CashOnDelivery";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import StripeForm from "./stripe-form";
+import CheckoutFooter from "../checkout-footer";
 
 const OrderPaymentForm = ({
   order,

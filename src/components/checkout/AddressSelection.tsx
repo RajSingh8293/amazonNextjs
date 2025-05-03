@@ -153,8 +153,6 @@ function AddressSelection({ addresses }: DataProps) {
     setSelected(addressId);
   };
 
-  console.log("addresses :", addresses);
-
   const handleSaveAddress = () => {
     if (selected) {
       const address = addresses.find((addr) => addr._id === selected);

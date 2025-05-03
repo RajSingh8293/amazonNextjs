@@ -6,7 +6,6 @@ export const data = {
       title: "Sale! Up to 70% off",
       desc: "Most Popular Shoes",
       btnCaption: "Shop Now",
-      // image: "/images/banner13.jpg",
       image: "/images/shoes/shoes_p4-2.jpg",
       url: "/search?category=Shoes",
       isPublished: true,

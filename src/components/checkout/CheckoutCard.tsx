@@ -21,10 +21,6 @@ const CheckoutCard = () => {
   const count = useCartStore((state) => state.getCartCount());
   const shippingOption = selectedShippingOption?.charge ?? 0;
 
-  // const formattedPrice = new Intl.NumberFormat("en-US", {
-  //   style: "currency",
-  //   currency: "USD",
-  // }).format(grandTotal);
   const isDisabled = !selectedPaymentMethod || !selectedAddress;
   const { cart } = useCartStore();
   const orderData = cart.map((item) => {
