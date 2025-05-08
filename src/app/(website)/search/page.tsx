@@ -131,7 +131,7 @@ const SearchPage = async (props: {
             </div>
             <div className="row px-5">
               <div className="grid md:grid-cols-12 grid-cols-1">
-                <div className="col-span-3 flex flex-col gap-2">
+                <div className="col-span-3 hidden md:flex flex-col gap-2">
                   {/* <Filters /> */}
                   <div className="">
                     <h1 className=" font-bold mb-1">Category</h1>
