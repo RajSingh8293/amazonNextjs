@@ -14,7 +14,6 @@ export async function POST(req: NextRequest) {
       { status: 400 }
     );
   }
-
   const existingUser = await User.findOne({ email });
 
   if (existingUser) {

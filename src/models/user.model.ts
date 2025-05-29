@@ -8,29 +8,6 @@ export interface Address {
   country: string;
   phone: string;
 }
-export interface IUser extends Document {
-  _id: string;
-  name: string;
-  email: string;
-  password: string;
-  role?: string;
-  emailVerified?: boolean;
-  paymentMethod?: string;
-  address?: Address[];
-  // address: {
-  //   fullName: string;
-  //   street: string;
-  //   // province: string;
-  //   city: string;
-  //   state: string;
-  //   postalCode: string;
-  //   country: string;
-  //   phone: string;
-  // };
-
-  createdAt: string;
-  updatedAt: string;
-}
 
 const AddressSchema = new Schema({
   fullName: { type: String, required: [true, "Please provide fullname"] },
@@ -42,6 +19,18 @@ const AddressSchema = new Schema({
   phone: { type: String, required: [true, "Please provide phone"] },
 });
 
+export interface IUser extends Document {
+  _id: string;
+  name: string;
+  email: string;
+  password: string;
+  role?: string;
+  emailVerified?: boolean;
+  paymentMethod?: string;
+  address?: Address[];
+  createdAt: string;
+  updatedAt: string;
+}
 const UserSchema: Schema<IUser> = new Schema(
   {
     name: {
@@ -72,7 +61,6 @@ const UserSchema: Schema<IUser> = new Schema(
   }
 );
 
-// const User = mongoose.models.User || mongoose.model<IUser>("User", UserSchema);
 const User: Model<IUser> =
   mongoose.models.User || mongoose.model<IUser>("User", UserSchema);
 export default User;

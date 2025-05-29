@@ -1,4 +1,4 @@
-"use client";
+// "use client";
 import React from "react";
 import {
   Breadcrumb,
@@ -15,11 +15,13 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { useSession } from "next-auth/react";
+import { requireAuthSession } from "@/lib/auth/requireAuthSession";
+// import { useSession } from "next-auth/react";
 
-const Profile = () => {
-  const { data: session } = useSession();
-  console.log("session :", session?.user.id);
+const Profile = async () => {
+  // const { data: session } = useSession();
+  const session = await requireAuthSession();
+  console.log("session :", session?.user);
 
   return (
     <div className="flex  justify-center min-h-screen w-full">

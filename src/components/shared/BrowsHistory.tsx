@@ -14,7 +14,6 @@ const BrowsHistory = ({
   size?: string;
 }) => {
   const history = useProductHistoryStore((state) => state.history);
-  //   const { history, clearHistory } = useProductHistoryStore();
 
   return (
     <div>

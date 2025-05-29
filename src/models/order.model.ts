@@ -29,6 +29,7 @@ const OrderItemSchema: Schema = new Schema<IOrderItem>({
   size: { type: String, required: true },
   color: { type: String, required: true },
 });
+
 export interface IOrder extends Document {
   _id: Types.ObjectId | string;
   user: mongoose.Types.ObjectId;
@@ -49,7 +50,6 @@ export interface IOrder extends Document {
   paidAt?: Date;
   isDelivered?: boolean;
   deliveredAt?: Date;
-  // expectedDeliveryDate: string;
   expectedDeliveryDate: Date;
   createdAt: Date;
   updatedAt: Date;

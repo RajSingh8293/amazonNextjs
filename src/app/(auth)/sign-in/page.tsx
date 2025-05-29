@@ -15,6 +15,7 @@ import Link from "next/link";
 import FormFooter from "@/components/shared/FormFooter";
 import { toast } from "sonner";
 const SignInPage = () => {
+  // const { data: session, status } = useSession();
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -33,6 +34,7 @@ const SignInPage = () => {
 
     if (res?.ok) {
       router.push(res.url || callbackUrl);
+      // router.replace(res.url || callbackUrl);
       toast.success("Sign in successfully");
     } else {
       setError("Invalid credentials");
@@ -48,7 +50,11 @@ const SignInPage = () => {
         </CardHeader>
         <CardContent>
           <div>
-            {error && <p className="text-red-500 text-center">{error}</p>}
+            {error && (
+              <div className="bg-red-100 text-red-700 p-3 rounded mb-4 text-sm">
+                {error}
+              </div>
+            )}
             <form onSubmit={handleSubmit}>
               <input type="hidden" name="callbackUrl" value={callbackUrl} />
               <div>

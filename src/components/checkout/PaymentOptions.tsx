@@ -4,7 +4,7 @@ import { useCheckoutStore } from "@/lib/hooks/useCheckoutStore";
 import { Button } from "../ui/button";
 import { paymentMethods } from "@/lib/data/data";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Label } from "../ui/label";
 import { Separator } from "../ui/separator";
 import SelectedPaymentMethod from "./SelectedPaymentMethod";
@@ -31,7 +31,11 @@ const PaymentOptions = () => {
     }
   };
 
-  console.log("selectedPaymentMethod :", selectedPaymentMethod?.id);
+  useEffect(() => {
+    if (!selected && paymentMethods.length > 0) {
+      setSelected(paymentMethods[0].id || null);
+    }
+  }, [selected]);
   return (
     <div className="space-y-4">
       {selectedPaymentMethod ? (

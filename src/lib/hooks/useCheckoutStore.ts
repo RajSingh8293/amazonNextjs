@@ -3,7 +3,6 @@ import { persist } from "zustand/middleware";
 
 export interface Address {
   _id?: string;
-  // userId?: string;
   fullName: string;
   street: string;
   city: string;

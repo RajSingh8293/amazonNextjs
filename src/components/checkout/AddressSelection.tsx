@@ -131,7 +131,7 @@
 //   );
 // };
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useCheckoutStore } from "@/lib/hooks/useCheckoutStore";
 
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
@@ -161,6 +161,12 @@ function AddressSelection({ addresses }: DataProps) {
       }
     }
   };
+
+  useEffect(() => {
+    if (!selected && addresses.length > 0) {
+      setSelected(addresses[0]._id || null);
+    }
+  }, [addresses, selected]);
 
   return (
     <div className="space-y-4">

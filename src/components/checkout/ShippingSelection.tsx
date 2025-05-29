@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
 import { useCheckoutStore } from "@/lib/hooks/useCheckoutStore";
 import { Label } from "../ui/label";
@@ -16,6 +16,12 @@ const ShippingSelection = () => {
       setSelected(shippingOptionId);
     }
   };
+
+  useEffect(() => {
+    if (!selected && shippingOptions.length > 0) {
+      setSelected(shippingOptions[0].id || null);
+    }
+  }, [selected]);
 
   return (
     <div className="my-4">

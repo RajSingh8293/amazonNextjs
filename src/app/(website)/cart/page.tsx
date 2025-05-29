@@ -7,20 +7,16 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { useRouter } from "next/navigation";
 import { useCartStore } from "@/lib/hooks/useCartStore";
 import { Check } from "lucide-react";
 import { FREE_DELIVERY_MIN_PRICE } from "@/lib/utils";
 import useIsMounted from "@/lib/hooks/useIsMounted";
 
 const CartPage = () => {
-  const router = useRouter();
   const { cart, removeFromCart, clearCart } = useCartStore();
   const total = useCartStore((state) => state.getCartTotal());
   const count = useCartStore((state) => state.getCartCount());
   const isMounted = useIsMounted();
-
-  // console.log("FREE_DELIVERY_MIN_PRICE", typeof FREE_DELIVERY_MIN_PRICE);
 
   return (
     <div className="text-black min-h-[100vh] bg-gray-100 px-5 py-8">
@@ -111,9 +107,9 @@ const CartPage = () => {
                       {isMounted && (
                         <div className="flex gap-1 justify-end">
                           <p> Subtotal ({count} items) :</p>{" "}
-                          <h1 className="font-bold">
+                          <div className="font-bold">
                             <ProductPrice price={total} plain />
-                          </h1>
+                          </div>
                         </div>
                       )}
                     </div>
@@ -163,21 +159,20 @@ const CartPage = () => {
                     </p>
                   </div>
                 )}
-                <div className="text-xl">
-                  Subtotal ({count} items):{" "}
-                  <span className="font-bold">
+                <div className=" flex justify-between items-center gap-4">
+                  <h1> Subtotal ({count} items): </h1>
+                  <div className="font-semibold">
                     <ProductPrice price={total} plain />
-                  </span>
+                  </div>
                 </div>
 
                 {count > 0 && (
                   <Button
-                    onClick={() => router.push("/checkout")}
                     size="sm"
                     className=" 
                   w-full rounded-full mt-3 bg-yellow-400 hover:bg-yellow-500"
                   >
-                    Proceed to buy
+                    <Link href={`/checkout`}>Proceed to buy</Link>
                   </Button>
                 )}
               </CardContent>

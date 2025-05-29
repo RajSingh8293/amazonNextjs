@@ -24,12 +24,13 @@ import {
 
 import { toast } from "sonner";
 import CashOnDelivery from "@/components/checkout/CashOnDelivery";
-import { loadStripe } from "@stripe/stripe-js";
-import { Elements } from "@stripe/react-stripe-js";
-import StripeForm from "./stripe-form";
+// import { loadStripe } from "@stripe/stripe-js";
+// import { Elements } from "@stripe/react-stripe-js";
+// import StripeForm from "./stripe-form";
 import CheckoutFooter from "../checkout-footer";
+import StripePayment from "../stripe-payment";
 
-const OrderPaymentForm = ({
+const PaymentForm = ({
   order,
   paypalClientId,
   clientSecret,
@@ -53,8 +54,6 @@ const OrderPaymentForm = ({
   } = order;
   const getExpectedDeliveryDate = getDayeAndDateAndTime(expectedDeliveryDate);
 
-  console.log("orderId :", order);
-
   if (isPaid) {
     redirect(`/your-account/orders/${order._id}`);
   }
@@ -62,7 +61,7 @@ const OrderPaymentForm = ({
     const [{ isPending, isRejected }] = usePayPalScriptReducer();
     let status = "";
     if (isPending) {
-      status = "loading PayPal...";
+      status = "Loading PayPal...";
     } else if (isRejected) {
       status = "Error in loading PayPal..";
     }
@@ -70,24 +69,15 @@ const OrderPaymentForm = ({
   }
   const handleCreatePayPalOrder = async () => {
     const res = await createOrderPayPalOrder(order?._id as string);
-    // const res = await createOrderPayPalOrder(order.id);
-    console.log("handleCreatePayPalOrder res ", res);
 
     if (!res?.success) {
       return toast.error(res?.message);
     }
-    // return res.data;
-    // if (!res?.success || !res.data) {
-    //   toast.error(res?.message || "Failed to create PayPal order");
-    //   throw new Error("Failed to create PayPal order");
-    // }
 
     return res.data;
   };
   const handleapprovePayPalOrder = async (data: { orderID: string }) => {
     const res = await approvePayPalOrder(order?._id as string, data);
-    // const res = await approvePayPalOrder(order?._id, data);
-    console.log("handleapprovePayPalOrder res ", res);
     if (res?.success) {
       toast.success(res?.message || "Payment successfully");
       return;
@@ -95,8 +85,6 @@ const OrderPaymentForm = ({
       toast.error(res?.message || "Payment approval failed");
       return;
     }
-
-    // toast.success("Payment successful!");
   };
 
   const Checkoutsummary = () => {
@@ -162,13 +150,12 @@ const OrderPaymentForm = ({
                 //   Cash on Delivery
                 // </Button>
               )}
+
               {!isPaid && paymentMethod == "Stripe" && clientSecret && (
-                <Elements options={{ clientSecret }} stripe={stripePromise}>
-                  <StripeForm
-                    priceInCents={Math.round(order.totalPrice * 100)}
-                    orderId={order._id as string}
-                  ></StripeForm>
-                </Elements>
+                <StripePayment
+                  orderId={order._id as string}
+                  totalPrice={totalPrice}
+                />
               )}
             </div>
           </div>
@@ -176,10 +163,6 @@ const OrderPaymentForm = ({
       </Card>
     );
   };
-
-  const stripePromise = loadStripe(
-    process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
-  );
 
   return (
     <div className="text-black min-h-[100vh] bg-gray-100 px-5 py-8">
@@ -398,4 +381,4 @@ const OrderPaymentForm = ({
 
 // export default CheckoutForm;
 
-export default OrderPaymentForm;
+export default PaymentForm;

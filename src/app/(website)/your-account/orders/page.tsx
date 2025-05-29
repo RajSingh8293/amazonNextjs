@@ -8,8 +8,6 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import BrowsHistory from "@/components/shared/BrowsHistory";
-// import MyOrders from "./my-orders";
-// import { redirect } from "next/navigation";
 import { getMyAllOrders } from "@/lib/actions/order.actions";
 import MyOrders from "@/components/order/MyOrders";
 
@@ -44,7 +42,6 @@ const Orders = async () => {
           <h1 className="text-3xl py-3 ">Your Orders</h1>
           <div>
             <MyOrders orders={orders?.orders ?? []} />
-            {/* <MyOrders /> */}
           </div>
         </div>
       </div>

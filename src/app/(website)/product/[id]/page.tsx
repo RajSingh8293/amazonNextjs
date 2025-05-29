@@ -55,7 +55,7 @@ const ProductDetail = async (props: {
               <ImagesGallary images={product.images} />
             </div>
           </div>
-          <div className="col-span-5 ">
+          <div className="col-span-5">
             <div className="flex flex-col gap-2">
               <div>
                 <h2>

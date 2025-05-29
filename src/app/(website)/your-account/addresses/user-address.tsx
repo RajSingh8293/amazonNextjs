@@ -4,7 +4,7 @@ import { IAddress } from "@/models/address.model";
 import React from "react";
 const UserAddress = async () => {
   const addresses: IAddress[] = await getAllUserAddresses();
-  console.log("addresses :", addresses);
+  // console.log("addresses :", addresses);
 
   return (
     <div className="w-full grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-4">

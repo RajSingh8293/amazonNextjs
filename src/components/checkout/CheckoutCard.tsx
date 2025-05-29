@@ -87,6 +87,7 @@ const CheckoutCard = () => {
       expectedDeliveryDate: expectedDeliveryDate,
     });
     router.push(`/your-account/orders/${order?._id}`);
+    // console.log("order created :", order);
     toast.success("Order created successfully");
   };
 
@@ -131,31 +132,31 @@ const CheckoutCard = () => {
 
         <div>
           <div className="flex justify-between items-center text-sm">
-            <p className="">Items:</p>
+            <div className="">Items:</div>
             {isMounted && (
-              <p className="font-semibold">
+              <div className="font-semibold">
                 {count > 0 ? count : <span>--</span>}
-              </p>
+              </div>
             )}
           </div>
           <div className="flex justify-between items-center text-sm">
-            <p className="">Shippin Option:</p>
+            <div className="">Shippin Option:</div>
             {shippingOption ? (
-              <p className="font-semibold">${shippingOption}</p>
+              <div className="font-semibold">${shippingOption}</div>
             ) : (
-              <p>--</p>
+              <div>0</div>
             )}
           </div>
           <div className="flex justify-between items-center text-sm">
-            <p className="">Tax :</p>
-            {taxPrice ? (
-              <p className="font-semibold">${taxPrice}</p>
-            ) : (
-              <p>--</p>
+            <div className="">Tax :</div>
+            {isMounted && (
+              <div className="font-semibold">
+                ${taxPrice ? taxPrice.toFixed(2) : 0}
+              </div>
             )}
           </div>
           <div className="text-xl font-bold flex justify-between items-center">
-            <p> Order Total : </p>
+            <div> Order Total : </div>
             {isMounted && (
               <div className="font-bold">
                 <ProductPrice price={totalPrice} plain />

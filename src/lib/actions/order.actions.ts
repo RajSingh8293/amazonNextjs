@@ -1,10 +1,11 @@
 "use server";
 import mongoose from "mongoose";
-import Order, { IOrder } from "@/models/order.model";
+import Order, { IOrder, IShippingAddress } from "@/models/order.model";
 import { dbConnect } from "../db/dbConnect";
 import { requireAuthSession } from "../auth/requireAuthSession";
 import { paypal } from "./paypal.actions";
 import { revalidatePath } from "next/cache";
+import { requireAdmin } from "../auth/requireAdmin";
 
 export interface OrderItem {
   productId: string;
@@ -15,18 +16,20 @@ export interface OrderItem {
   size: string;
   color: string;
 }
-export interface ShippingAddress {
-  fullName: string;
-  state: string;
-  phone: string;
-  street: string;
-  city: string;
-  postalCode: string;
-  country: string;
-}
+// export interface ShippingAddress {
+//   fullName: string;
+//   state: string;
+//   phone: string;
+//   street: string;
+//   city: string;
+//   postalCode: string;
+//   country: string;
+// }
 export interface CreateOrderProps {
   orderItems: OrderItem[];
-  shippingAddress: ShippingAddress;
+  // shippingAddress: ShippingAddress;
+  // orderItems: IOrderItem[];
+  shippingAddress: IShippingAddress;
   paymentMethod: string;
   itemsPrice: number;
   taxPrice: number;
@@ -207,6 +210,30 @@ export const getMyAllOrders = async () => {
       throw new Error("Unauthorized");
     }
     const orders = await Order.find({ user: session?.user?.id });
+    if (!orders) {
+      return {
+        success: false,
+        message: "Orders not found",
+      };
+    }
+    return {
+      orders: JSON.parse(JSON.stringify(orders)) as IOrder[],
+    };
+    // return order;
+  } catch (error) {
+    console.error("Error:", error);
+    throw error;
+  }
+};
+export const getAllOrders = async () => {
+  try {
+    await dbConnect();
+    const session = await requireAdmin();
+
+    if (!session?.user?.id) {
+      throw new Error("Unauthorized");
+    }
+    const orders = await Order.find();
     if (!orders) {
       return {
         success: false,

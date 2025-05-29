@@ -45,7 +45,6 @@ const UserButton = () => {
                 </DropdownMenuItem>
               )}
               <DropdownMenuItem>
-                {/* <form action={SignOut}> */}
                 <Button onClick={() => signOut()}>Sign-Out</Button>
               </DropdownMenuItem>
             </DropdownMenuContent>
