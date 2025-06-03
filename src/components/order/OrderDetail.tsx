@@ -20,16 +20,16 @@ import useIsMounted from "@/lib/hooks/useIsMounted";
 const OrderDetail = ({ order }: { order: IOrder }) => {
   console.log("order :", order);
   const isMounted = useIsMounted();
-  if (!order) {
-    return (
-      <div className="flex justify-center flex-col gap-2 items-center h-[100vh] w-[100%]">
-        <h1 className="text-xl font-bold">Order Not Found</h1>
-        <Button>
-          <Link href="/">Go back</Link>
-        </Button>
-      </div>
-    );
-  }
+  // if (!order) {
+  //   return (
+  //     <div className="flex justify-center flex-col gap-2 items-center h-[100vh] w-[100%]">
+  //       <h1 className="text-xl font-bold">Order Not Found</h1>
+  //       <Button>
+  //         <Link href="/">Go back</Link>
+  //       </Button>
+  //     </div>
+  //   );
+  // }
   const shortId = (order._id as string).slice(0, 8);
 
   return (

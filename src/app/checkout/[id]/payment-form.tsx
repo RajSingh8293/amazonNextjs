@@ -164,6 +164,8 @@ const PaymentForm = ({
     );
   };
 
+  console.log("shippingAddress :", shippingAddress);
+
   return (
     <div className="text-black min-h-[100vh] bg-gray-100 px-5 py-8">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
