@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import { getOrderById } from "@/lib/actions/order.actions";
 import React from "react";
 import { requireAuthSession } from "@/lib/auth/requireAuthSession";
