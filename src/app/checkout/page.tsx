@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import AddressSelection from "@/components/checkout/AddressSelection";
 import CheckoutCard from "@/components/checkout/CheckoutCard";
 import CheckoutFooter from "@/components/checkout/CheckoutFooter";
