@@ -5,20 +5,20 @@ import CheckoutFooter from "@/components/checkout/CheckoutFooter";
 import PaymentOptions from "@/components/checkout/PaymentOptions";
 import ProductSummary from "@/components/checkout/ProductSummary";
 import { getAllUserAddresses } from "@/lib/actions/address.actions";
-import { requireAuthSession } from "@/lib/auth/requireAuthSession";
+// import { requireAuthSession } from "@/lib/auth/requireAuthSession";
 import { IAddress } from "@/models/address.model";
 import { Metadata } from "next";
-import { redirect } from "next/navigation";
+// import { redirect } from "next/navigation";
 export const metadata: Metadata = {
   title: "Checkout",
 };
 
 const Checkout = async () => {
-  const session = await requireAuthSession();
-  //  const session = await auth()
-  if (!session.user) {
-    redirect(`/sign-in?callbackUrl=/checkout`);
-  }
+  // const session = await requireAuthSession();
+  // //  const session = await auth()
+  // if (!session.user) {
+  //   redirect(`/sign-in?callbackUrl=/checkout`);
+  // }
   const addresses: IAddress[] = await getAllUserAddresses();
   return (
     <div className="text-black min-h-[100vh] bg-gray-100 px-5 py-8">
